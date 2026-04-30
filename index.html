@@ -396,11 +396,32 @@ const pc=document.createElement('div');
 pc.className='slide';pc.id='spc';
 pc.innerHTML=`
   <div class="slide-hdr"><div class="eyebrow">Looking Forward</div><h2>Post Camp Commitment</h2></div>
-  <div class="pc-items">
-    <div class="pc-item"><div class="pc-icon">🌱</div>Apply what you have learnt about testimony in your everyday conversations and encounters — not only at camp.</div>
-    <div class="pc-item"><div class="pc-icon">🤝</div>Continue breaking bread with your group and with fellow youth members beyond the camp weekend.</div>
-    <div class="pc-item"><div class="pc-icon">💬</div>Reflect on the character encounter — what it revealed about your posture, your listening, and your understanding of faith.</div>
-    <div class="pc-item"><div class="pc-icon">✉️</div>Stay connected with your group and support one another in continued spiritual growth.</div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;flex:1">
+
+    <div style="background:var(--teal);border:1px solid var(--teal2);display:flex;flex-direction:column;padding:28px 24px;gap:20px">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--gold2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      <div style="font-family:var(--fb);font-size:22px;font-weight:700;color:var(--gold2);letter-spacing:.06em;text-transform:uppercase">Apply</div>
+      <div style="font-size:22px;color:rgba(240,230,208,.8);line-height:1.6">Apply what you learnt about testimony in your everyday conversations — not only at camp.</div>
+    </div>
+
+    <div style="background:var(--cream2);border:1px solid var(--cream3);border-top:6px solid var(--orange);display:flex;flex-direction:column;padding:28px 24px;gap:20px">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <div style="font-family:var(--fb);font-size:22px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase">Fellowship</div>
+      <div style="font-size:22px;color:var(--brown2);line-height:1.6">Continue breaking bread with your group and fellow youth members beyond the camp weekend.</div>
+    </div>
+
+    <div style="background:var(--cream2);border:1px solid var(--cream3);border-top:6px solid var(--teal);display:flex;flex-direction:column;padding:28px 24px;gap:20px">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="15" y2="10"/><line x1="12" y1="7" x2="12" y2="13"/></svg>
+      <div style="font-family:var(--fb);font-size:22px;font-weight:700;color:var(--teal);letter-spacing:.06em;text-transform:uppercase">Reflect</div>
+      <div style="font-size:22px;color:var(--brown2);line-height:1.6">Reflect on the character encounter — what it revealed about your posture, listening, and understanding of faith.</div>
+    </div>
+
+    <div style="background:var(--cream2);border:1px solid var(--cream3);border-top:6px solid var(--gold);display:flex;flex-direction:column;padding:28px 24px;gap:20px">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <div style="font-family:var(--fb);font-size:22px;font-weight:700;color:var(--gold);letter-spacing:.06em;text-transform:uppercase">Connect</div>
+      <div style="font-size:22px;color:var(--brown2);line-height:1.6">Stay connected with your group and support one another in continued spiritual growth.</div>
+    </div>
+
   </div>`;
 wrap.appendChild(pc);
 
