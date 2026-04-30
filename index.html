@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EYC 2026 – Vintage Theme</title>
+<link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=League+Spartan:wght@400;500;600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#f0e6d0;--cream2:#e6dbc6;--cream3:#d4c8b0;--cream4:#c8bca0;
+  --teal:#1c4740;--teal2:#255a52;
+  --orange:#c85a20;--orange2:#e06a2a;
+  --brown:#2a1f14;--brown2:#5a4a3a;--brown3:#8a7a6a;
+  --gold:#b8943c;--gold2:#d4aa50;
+  --fh:'League Gothic',sans-serif;
+  --fb:'League Spartan',sans-serif;
+  --fs:'Patrick Hand',cursive;
+}
+html,body{height:100%;background:var(--cream);color:var(--brown);font-family:var(--fb);font-size:36px;overflow:hidden}
+.pres{height:100vh;display:flex;flex-direction:column}
+
+/* Progress bar */
+.progress-bar{height:5px;background:var(--cream3);position:relative;z-index:20}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--orange),var(--gold));transition:width .4s ease;width:0%}
+
+.slides-wrap{flex:1;position:relative;overflow:hidden}
+.slides-wrap::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:44px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 44' preserveAspectRatio='none'%3E%3Cpath d='M0,44 L0,24 L90,6 L170,20 L270,3 L360,16 L445,1 L535,14 L625,0 L715,13 L815,3 L910,17 L1010,2 L1105,15 L1200,4 L1200,44Z' fill='rgba(28,71,64,0.07)'/%3E%3Cpath d='M0,44 L0,32 L140,16 L240,28 L370,13 L470,26 L575,11 L675,24 L775,9 L875,23 L975,14 L1075,27 L1200,18 L1200,44Z' fill='rgba(28,71,64,0.11)'/%3E%3C/svg%3E") no-repeat bottom;
+  background-size:cover;pointer-events:none;z-index:5;
+}
+.slide{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  padding:24px 44px 56px;opacity:0;pointer-events:none;
+  transition:opacity .35s ease,transform .35s ease;
+  transform:translateX(40px);
+  overflow-y:auto;
+  background:var(--cream);
+  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c8bca0' fill-opacity='0.12'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+}
+.slide.active{opacity:1;pointer-events:all;transform:translateX(0)}
+.slide.exit{opacity:0;transform:translateX(-40px)}
+
+/* Nav */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:10px 24px;background:var(--teal);border-top:3px solid var(--orange);gap:12px;position:relative;z-index:10}
+.nav-btn{background:transparent;border:2px solid rgba(240,230,208,.4);color:var(--cream);padding:8px 24px;font-size:22px;cursor:pointer;font-family:var(--fb);font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:all .2s}
+.nav-btn:hover:not(:disabled){background:rgba(240,230,208,.12);border-color:rgba(240,230,208,.7)}
+.nav-btn:disabled{opacity:.25;cursor:default}
+.nav-center{display:flex;align-items:center;gap:6px;flex:1;justify-content:center}
+.nav-dot{width:9px;height:9px;background:rgba(240,230,208,.2);cursor:pointer;transition:all .2s;transform:rotate(45deg)}
+.nav-dot.active{background:var(--orange2);transform:rotate(45deg) scale(1.5)}
+.nav-counter{font-size:20px;color:rgba(240,230,208,.5);min-width:80px;text-align:center;font-family:var(--fb);letter-spacing:.08em}
+
+/* Typography */
+.eyebrow{font-family:var(--fs);font-size:38px;color:var(--orange);display:inline-block;line-height:1.3;margin-bottom:4px}
+.slide-hdr{margin-bottom:16px;padding-bottom:12px;border-bottom:3px solid var(--cream3)}
+.slide-hdr h2{font-family:var(--fb);font-size:60px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--teal);line-height:1.05}
+.lbl{font-family:var(--fb);font-size:20px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+
+/* TITLE */
+.slide-title{background:var(--teal)!important;padding:0!important;overflow:hidden;background-image:none!important}
+.title-inner{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;flex:1;padding:24px 48px 0;position:relative;z-index:2}
+.title-eyebrow{font-family:var(--fs);font-size:48px;color:var(--gold2);margin-bottom:10px}
+.title-h1{font-family:var(--fh);font-size:120px;line-height:.9;letter-spacing:.02em;color:var(--cream);margin-bottom:22px}
+.title-badges{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.tbadge{padding:12px 28px;font-family:var(--fb);font-size:24px;font-weight:700;letter-spacing:.07em;text-transform:uppercase}
+.tbadge.fill{background:var(--orange);color:var(--cream)}
+.tbadge.out{border:2px solid rgba(240,230,208,.3);color:rgba(240,230,208,.7)}
+.nations{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.nation{padding:7px 18px;border:1px solid rgba(240,230,208,.2);color:rgba(240,230,208,.55);font-family:var(--fb);font-size:20px;letter-spacing:.06em;text-transform:uppercase}
+.mtn{flex-shrink:0}
+.mtn svg{width:100%;display:block}
+
+/* AGENDA */
+.agenda-list{display:flex;flex-direction:column;gap:10px;flex:1;justify-content:center}
+.ag-item{display:flex;align-items:center;gap:20px;padding:18px 24px;background:var(--cream2);border:1px solid var(--cream3);border-left:6px solid var(--teal);transition:border-color .2s,background .2s;cursor:default}
+.ag-item:hover{background:var(--cream3);border-left-color:var(--orange)}
+.ag-num{font-family:var(--fh);font-size:64px;color:var(--cream4);line-height:1;min-width:64px}
+.ag-text{font-family:var(--fb);font-size:34px;font-weight:600;color:var(--teal);letter-spacing:.01em}
+
+/* SCRIPTURE */
+.scripture-list{display:flex;flex-direction:column;gap:12px;flex:1}
+.sc-item{background:var(--cream2);border:1px solid var(--cream3);border-left:6px solid var(--orange);padding:18px 24px;position:relative;overflow:hidden}
+.sc-item::before{content:'"';position:absolute;top:-10px;right:16px;font-family:var(--fh);font-size:140px;color:var(--teal);opacity:.07;line-height:1;pointer-events:none}
+.sc-ref{font-family:var(--fb);font-size:20px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:8px}
+.sc-text{font-family:var(--fb);font-size:28px;color:var(--brown2);line-height:1.6}
+
+/* OBJECTIVES */
+.objectives{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;flex:1}
+.obj{padding:28px 24px;display:flex;flex-direction:column;gap:12px;border:1px solid var(--cream3);align-items:flex-start}
+.obj.a{background:var(--teal);border-color:var(--teal2)}
+.obj.b{background:var(--cream2);border-left:6px solid var(--orange)}
+.obj.c{background:var(--cream2);border-left:6px solid var(--gold)}
+.obj-icon{font-size:52px;line-height:1}
+.obj-lbl{font-family:var(--fb);font-size:20px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.obj.a .obj-lbl{color:var(--gold2)}.obj.b .obj-lbl{color:var(--orange)}.obj.c .obj-lbl{color:var(--gold)}
+.obj-title{font-family:var(--fb);font-size:30px;font-weight:700;line-height:1.2}
+.obj.a .obj-title{color:var(--cream)}.obj.b .obj-title,.obj.c .obj-title{color:var(--teal)}
+.obj-desc{font-size:22px;line-height:1.6}
+.obj.a .obj-desc{color:rgba(240,230,208,.75)}.obj.b .obj-desc,.obj.c .obj-desc{color:var(--brown2)}
+
+/* DETAILS */
+.details-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;flex:1}
+.det-card{background:var(--cream2);border:1px solid var(--cream3);padding:24px;display:flex;flex-direction:column;gap:10px}
+.det-card:nth-child(1) .lbl{color:var(--teal)}.det-card:nth-child(2) .lbl{color:var(--orange)}.det-card:nth-child(3) .lbl{color:var(--gold)}
+.det-title{font-family:var(--fb);font-size:36px;font-weight:700;color:var(--teal)}
+.det-ph{flex:1;display:flex;align-items:center;justify-content:center;border:2px dashed var(--cream3);padding:16px;font-size:24px;color:var(--brown3);text-align:center;font-style:italic}
+
+/* GROUPS OVERVIEW */
+.go-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;flex:1}
+.go-card{background:var(--cream2);border:1px solid var(--cream3);padding:20px}
+.go-title{font-family:var(--fb);font-size:20px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--cream3)}
+.go-card:nth-child(1) .go-title{color:var(--teal)}.go-card:nth-child(2) .go-title{color:var(--orange)}.go-card:nth-child(3) .go-title{color:var(--gold)}
+.go-items{display:flex;flex-direction:column;gap:10px}
+.go-item{display:flex;gap:10px;align-items:flex-start;font-size:24px;color:var(--brown2);line-height:1.55}
+.go-dot{width:6px;min-height:20px;flex-shrink:0;margin-top:6px}
+.go-card:nth-child(1) .go-dot{background:var(--teal)}.go-card:nth-child(2) .go-dot{background:var(--orange)}.go-card:nth-child(3) .go-dot{background:var(--gold)}
+
+/* CHARACTER PROFILES */
+.prof-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;flex:1}
+.prof-card{background:var(--cream2);border:1px solid var(--cream3);overflow:hidden;display:flex;flex-direction:column}
+.prof-img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top;background:var(--cream)}
+.prof-info{padding:12px 14px;flex:1;display:flex;flex-direction:column;gap:5px}
+.prof-num{font-family:var(--fb);font-size:18px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--orange)}
+.prof-name{font-family:var(--fb);font-size:22px;font-weight:700;color:var(--teal);line-height:1.25;min-height:56px}
+.prof-desc{font-size:18px;color:var(--brown2);line-height:1.5}
+
+/* GROUP SLIDES */
+.grp-hdr{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+.grp-badge{display:flex;align-items:center;background:var(--teal)}
+.grp-num{width:52px;height:52px;background:var(--orange);color:var(--cream);font-family:var(--fh);font-size:38px;display:flex;align-items:center;justify-content:center}
+.grp-badge-txt{font-family:var(--fb);font-size:24px;font-weight:700;color:var(--cream);letter-spacing:.08em;text-transform:uppercase;padding:0 18px}
+.grp-sub{font-family:var(--fb);font-size:20px;letter-spacing:.08em;text-transform:uppercase;color:var(--brown3)}
+.grp-layout{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;flex:1}
+.grp-tbl-wrap{border:1px solid var(--cream3);overflow:hidden}
+.grp-tbl-lbl{font-family:var(--fb);font-size:18px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--cream);background:var(--teal);padding:12px 16px}
+table{width:100%;border-collapse:collapse}
+th{font-family:var(--fb);font-size:18px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--brown3);text-align:left;padding:10px 14px;border-bottom:2px solid var(--cream3);background:var(--cream2)}
+td{font-size:24px;color:var(--brown2);padding:10px 14px;border-bottom:1px solid var(--cream2)}
+tr:last-child td{border-bottom:none}
+td:first-child{color:var(--brown);font-weight:600}
+.rtag{display:inline-block;padding:3px 10px;font-family:var(--fb);font-size:16px;font-weight:700;letter-spacing:.05em}
+.rtag.br{background:var(--teal);color:var(--cream)}.rtag.sr{background:var(--orange);color:var(--cream)}
+.grp-right{display:flex;flex-direction:column;gap:12px}
+.topics-card{border:1px solid var(--cream3);overflow:hidden}
+.topics-lbl{font-family:var(--fb);font-size:18px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--cream);background:var(--orange);padding:12px 16px}
+.topic-item{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-bottom:1px solid var(--cream2);background:var(--cream2)}
+.topic-item:last-child{border-bottom:none}
+.topic-num{width:28px;height:28px;background:var(--orange);color:var(--cream);font-family:var(--fb);font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:3px}
+.topic-txt{font-size:24px;color:var(--brown2);line-height:1.5}
+.fac-card{background:var(--teal);padding:16px 20px}
+.fac-lbl{font-family:var(--fb);font-size:18px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold2);margin-bottom:6px}
+.fac-name{font-family:var(--fb);font-size:30px;font-weight:600;color:var(--cream)}
+
+/* POST CAMP */
+.pc-items{display:flex;flex-direction:column;gap:12px;flex:1}
+.pc-item{background:var(--cream2);border:1px solid var(--cream3);border-left:6px solid var(--teal);padding:20px 26px;font-size:28px;color:var(--brown2);line-height:1.6;display:flex;gap:18px;align-items:flex-start}
+.pc-icon{font-size:32px;flex-shrink:0;margin-top:3px}
+</style>
+</head>
+<body>
+<div class="pres">
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="slides-wrap">
+
+    <!-- S1: TITLE -->
+    <div class="slide slide-title active" id="s1">
+      <div class="title-inner">
+        <div class="title-eyebrow">Old Apostolic Church</div>
+        <div class="title-h1">2026 European<br>Youth Camp</div>
+        <div class="title-badges">
+          <div class="tbadge fill">24 – 26 July 2026</div>
+          <div class="tbadge out">Stubbers Adventure Camp · London, UK</div>
+        </div>
+        <div class="nations">
+          <span class="nation">🇵🇹 Portugal</span>
+          <span class="nation">🇮🇪 Ireland</span>
+          <span class="nation">🇩🇪 Germany</span>
+          <span class="nation">🇬🇧 United Kingdom</span>
+          <span class="nation">🇮🇹 Italy</span>
+        </div>
+      </div>
+      <div class="mtn">
+        <svg viewBox="0 0 1200 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,200 L0,120 L90,50 L170,90 L270,30 L370,75 L455,25 L550,65 L635,28 L720,70 L820,22 L920,68 L1020,28 L1110,72 L1200,40 L1200,200Z" fill="rgba(240,230,208,0.05)"/>
+          <path d="M0,200 L0,140 L130,75 L220,108 L340,55 L460,95 L568,48 L678,85 L788,40 L900,82 L1010,50 L1120,88 L1200,65 L1200,200Z" fill="rgba(240,230,208,0.10)"/>
+          <path d="M0,200 L0,158 L160,98 L268,132 L390,88 L508,122 L620,80 L738,118 L852,78 L970,118 L1082,90 L1200,128 L1200,200Z" fill="rgba(240,230,208,0.18)"/>
+          <circle cx="600" cy="42" r="36" fill="rgba(212,170,80,0.14)"/>
+          <circle cx="600" cy="42" r="22" fill="rgba(212,170,80,0.22)"/>
+          <line x1="600" y1="2" x2="600" y2="14" stroke="rgba(212,170,80,0.6)" stroke-width="4" stroke-linecap="round"/>
+          <line x1="600" y1="70" x2="600" y2="82" stroke="rgba(212,170,80,0.6)" stroke-width="4" stroke-linecap="round"/>
+          <line x1="560" y1="14" x2="568" y2="24" stroke="rgba(212,170,80,0.5)" stroke-width="3" stroke-linecap="round"/>
+          <line x1="640" y1="14" x2="632" y2="24" stroke="rgba(212,170,80,0.5)" stroke-width="3" stroke-linecap="round"/>
+          <line x1="550" y1="42" x2="562" y2="42" stroke="rgba(212,170,80,0.5)" stroke-width="3" stroke-linecap="round"/>
+          <line x1="650" y1="42" x2="638" y2="42" stroke="rgba(212,170,80,0.5)" stroke-width="3" stroke-linecap="round"/>
+          <line x1="560" y1="70" x2="568" y2="60" stroke="rgba(212,170,80,0.5)" stroke-width="3" stroke-linecap="round"/>
+          <line x1="640" y1="70" x2="632" y2="60" stroke="rgba(212,170,80,0.5)" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- S2: AGENDA -->
+    <div class="slide" id="s2">
+      <div class="slide-hdr"><div class="eyebrow">Overview</div><h2>Agenda</h2></div>
+      <div class="agenda-list">
+        <div class="ag-item"><div class="ag-num">01</div><div class="ag-text">Camp Theme &amp; Objectives</div></div>
+        <div class="ag-item"><div class="ag-num">02</div><div class="ag-text">Camp Details – Pr &amp; Sr Prinsloo</div></div>
+        <div class="ag-item"><div class="ag-num">03</div><div class="ag-text">Evangelistic Groups – U/D Radzilani &amp; Br Carstens</div></div>
+        <div class="ag-item"><div class="ag-num">04</div><div class="ag-text">Post Camp Commitment</div></div>
+      </div>
+    </div>
+
+    <!-- S3: THEME -->
+    <div class="slide" id="s3">
+      <div class="slide-hdr"><div class="eyebrow">Camp Theme</div><h2>Growing Together in Fellowship, Evangelism &amp; Spirit</h2></div>
+      <div style="display:flex;gap:10px;margin-bottom:18px">
+        <span style="padding:8px 18px;background:var(--teal);color:var(--cream);font-family:var(--fb);font-size:20px;font-weight:700;letter-spacing:.08em;text-transform:uppercase">Fellowship</span>
+        <span style="padding:8px 18px;background:var(--orange);color:var(--cream);font-family:var(--fb);font-size:20px;font-weight:700;letter-spacing:.08em;text-transform:uppercase">Evangelism</span>
+        <span style="padding:8px 18px;background:var(--gold);color:var(--cream);font-family:var(--fb);font-size:20px;font-weight:700;letter-spacing:.08em;text-transform:uppercase">Spirit</span>
+      </div>
+      <div class="sc-item" style="margin-bottom:14px"><div class="sc-ref">2 Timothy 4:5</div><div class="sc-text">"Do the work of an evangelist, fulfil your ministry."</div></div>
+      <div style="background:var(--cream2);border:1px solid var(--cream3);padding:20px 24px">
+        <div class="lbl" style="color:var(--brown3);margin-bottom:8px">Evangelist — a person who</div>
+        <div style="font-size:26px;color:var(--brown2);line-height:1.65">Seeks to share the gospel and invite others into a living understanding of faith — not through pressure, but through honest conversation, lived witness, and patient testimony.</div>
+      </div>
+    </div>
+
+    <!-- S4: SCRIPTURE -->
+    <div class="slide" id="s4">
+      <div class="slide-hdr"><div class="eyebrow">Scriptural Foundation</div><h2>Why Evangelism?</h2></div>
+      <div class="scripture-list">
+        <div class="sc-item"><div class="sc-ref">Hosea 4:6</div><div class="sc-text">"My people are destroyed for a lack of knowledge."</div></div>
+        <div class="sc-item"><div class="sc-ref">2 Timothy 4:2 &amp; 5</div><div class="sc-text">"Preach the word! Be ready in season and out of season… do the work of an evangelist, fulfil your ministry."</div></div>
+        <div class="sc-item"><div class="sc-ref">Matthew 28:19 &amp; 20</div><div class="sc-text">"Go therefore and make disciples of all the nations… I am with you always, even to the end of the age."</div></div>
+      </div>
+    </div>
+
+    <!-- S5: OBJECTIVES -->
+    <div class="slide" id="s5">
+      <div class="slide-hdr"><div class="eyebrow">What we aim to achieve</div><h2>Camp Objectives</h2></div>
+      <div class="objectives">
+        <div class="obj a"><div class="obj-icon">🤝</div><div class="obj-lbl">Fellowship</div><div class="obj-title">Building &amp; Maintaining Connections</div><div class="obj-desc">Strengthening bonds across nations and deepening our shared sense of belonging in the body of Christ.</div></div>
+        <div class="obj b"><div class="obj-icon">📢</div><div class="obj-lbl">Evangelism</div><div class="obj-title">Empowering Youth to Spread the Gospel</div><div class="obj-desc">Equipping every youth member with the confidence, knowledge, and posture to share their faith in everyday life.</div></div>
+        <div class="obj c"><div class="obj-icon">🕊️</div><div class="obj-lbl">Spirit</div><div class="obj-title">Allowing the Spirit to Lead &amp; Guide Us</div><div class="obj-desc">Creating space for the Holy Spirit to work through our conversations, preparation, and reflection.</div></div>
+      </div>
+    </div>
+
+    <!-- S6: DETAILS -->
+    <div class="slide" id="s6">
+      <div class="slide-hdr"><div class="eyebrow">Pr &amp; Sr Prinsloo</div><h2>Camp Details</h2></div>
+      <div class="details-grid">
+        <div class="det-card"><div class="lbl">Before Camp</div><div class="det-title">Preparation</div><div class="det-ph">To be shared by Pr &amp; Sr Prinsloo</div></div>
+        <div class="det-card"><div class="lbl">At the Camp</div><div class="det-title">Programme</div><div class="det-ph">To be shared by Pr &amp; Sr Prinsloo</div></div>
+        <div class="det-card"><div class="lbl">After Camp</div><div class="det-title">Follow-up</div><div class="det-ph">To be shared by Pr &amp; Sr Prinsloo</div></div>
+      </div>
+    </div>
+
+    <!-- S7: GROUPS -->
+    <div class="slide" id="s7">
+      <div class="slide-hdr"><div class="eyebrow">U/D Radzilani &amp; Br Carstens</div><h2>Evangelistic Groups</h2></div>
+      <div class="go-grid">
+        <div class="go-card"><div class="go-title">Group Structure</div><div class="go-items"><div class="go-item"><div class="go-dot"></div>13 groups of 4–5 youth members</div><div class="go-item"><div class="go-dot"></div>Each group nominates a Chairperson to organise breadbreaks</div><div class="go-item"><div class="go-dot"></div>All youth must actively participate in breadbreaks</div><div class="go-item"><div class="go-dot"></div>Each group is assigned a facilitating Officer or Help Power</div></div></div>
+        <div class="go-card"><div class="go-title">What is Required</div><div class="go-items"><div class="go-item"><div class="go-dot"></div>Prepare as if you will be personally testifying</div><div class="go-item"><div class="go-dot"></div>Research both assigned topics thoroughly</div><div class="go-item"><div class="go-dot"></div>Break bread together about each topic during preparation</div></div></div>
+        <div class="go-card"><div class="go-title">Your Output</div><div class="go-items"><div class="go-item"><div class="go-dot"></div>Prepare a slide summarising each topic with scriptural references</div><div class="go-item"><div class="go-dot"></div>One nominated youth member portrays an assigned character profile</div><div class="go-item"><div class="go-dot"></div>Testify to your character regarding one of your topics at camp</div></div></div>
+      </div>
+    </div>
+
+    <!-- S7b: BEFORE THE CAMP -->
+    <div class="slide" id="s7b">
+      <div class="slide-hdr"><div class="eyebrow">Action Steps</div><h2>Before the Camp</h2></div>
+      <div style="display:flex;flex-direction:column;gap:10px;flex:1">
+        <div class="go-card" style="flex:1;border-left:6px solid var(--orange)">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px 32px">
+
+            <div style="display:flex;gap:14px;align-items:flex-start">
+              <svg style="flex-shrink:0;margin-top:4px" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <span class="go-item" style="padding:0;border:none;background:none">Create a WhatsApp group for your group</span>
+            </div>
+
+            <div style="display:flex;gap:14px;align-items:flex-start">
+              <svg style="flex-shrink:0;margin-top:4px" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              <span class="go-item" style="padding:0;border:none;background:none">Prepare your presentation about the two topics</span>
+            </div>
+
+            <div style="display:flex;gap:14px;align-items:flex-start">
+              <svg style="flex-shrink:0;margin-top:4px" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/><line x1="12" y1="12" x2="12" y2="21"/></svg>
+              <span class="go-item" style="padding:0;border:none;background:none">Chairperson to be chosen by <strong style="color:var(--orange)">27 May</strong></span>
+            </div>
+
+            <div style="display:flex;gap:14px;align-items:flex-start">
+              <svg style="flex-shrink:0;margin-top:4px" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22 11 13 2 9l20-7z"/></svg>
+              <span class="go-item" style="padding:0;border:none;background:none">Share your presentation with the facilitator</span>
+            </div>
+
+            <div style="display:flex;gap:14px;align-items:flex-start">
+              <svg style="flex-shrink:0;margin-top:4px" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span class="go-item" style="padding:0;border:none;background:none">Character to be chosen by <strong style="color:var(--orange)">27 May</strong></span>
+            </div>
+
+            <div style="display:flex;gap:14px;align-items:flex-start">
+              <svg style="flex-shrink:0;margin-top:4px" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span class="go-item" style="padding:0;border:none;background:none">Character briefing meeting to be set up at a later date</span>
+            </div>
+
+            <div style="display:flex;gap:14px;align-items:flex-start">
+              <svg style="flex-shrink:0;margin-top:4px" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+              <span class="go-item" style="padding:0;border:none;background:none">Organise three breadbreaks before the camp</span>
+            </div>
+
+            <div style="display:flex;gap:14px;align-items:flex-start">
+              <svg style="flex-shrink:0;margin-top:4px" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>
+              <span class="go-item" style="padding:0;border:none;background:none">Connect with your facilitator</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S8a: CHARACTER PROFILES 1–5 -->
+    <div class="slide" id="s8a">
+      <div class="slide-hdr"><div class="eyebrow">Evangelistic Character Challenge</div><h2>Character Profiles <span style="font-size:40px;opacity:.5">1 – 5</span></h2></div>
+      <div class="prof-grid">
+        <div class="prof-card"><img class="prof-img" src="https://raw.githubusercontent.com/Brolloks/OAC/main/Profile%201.png" alt="P1"><div class="prof-info"><div class="prof-num">Profile 01</div><div class="prof-name">The Thoughtful Scientific Thinker</div><div class="prof-desc">Values logic and evidence. Cautious of beliefs that cannot be clearly reasoned.</div></div></div>
+        <div class="prof-card"><img class="prof-img" src="https://raw.githubusercontent.com/Brolloks/OAC/main/Profile%202.png" alt="P2"><div class="prof-info"><div class="prof-num">Profile 02</div><div class="prof-name">The Cautious Churchgoer</div><div class="prof-desc">Has past church experience. Still values faith but hesitant about involvement.</div></div></div>
+        <div class="prof-card"><img class="prof-img" src="https://raw.githubusercontent.com/Brolloks/OAC/main/Profile%203.png" alt="P3"><div class="prof-info"><div class="prof-num">Profile 03</div><div class="prof-name">The Spiritual-but-Not-Religious</div><div class="prof-desc">Open to spirituality but uncomfortable with organised religion.</div></div></div>
+        <div class="prof-card"><img class="prof-img" src="https://raw.githubusercontent.com/Brolloks/OAC/main/Profile%204.png" alt="P4"><div class="prof-info"><div class="prof-num">Profile 04</div><div class="prof-name">The Friendly Skeptic</div><div class="prof-desc">Open to conversation but sees faith as a personal choice.</div></div></div>
+        <div class="prof-card"><img class="prof-img" src="https://raw.githubusercontent.com/Brolloks/OAC/main/Profile%205.png" alt="P5"><div class="prof-info"><div class="prof-num">Profile 05</div><div class="prof-name">The Busy Professional</div><div class="prof-desc">Open to faith in principle but struggles to see how it fits daily life.</div></div></div>
+      </div>
+    </div>
+
+    <!-- S8b: CHARACTER PROFILES 6–10 -->
+    <div class="slide" id="s8b">
+      <div class="slide-hdr"><div class="eyebrow">Evangelistic Character Challenge</div><h2>Character Profiles <span style="font-size:40px;opacity:.5">6 – 10</span></h2></div>
+      <div class="prof-grid">
+        <div class="prof-card"><img class="prof-img" src="https://raw.githubusercontent.com/Brolloks/OAC/main/Profile%206.png" alt="P6"><div class="prof-info"><div class="prof-num">Profile 06</div><div class="prof-name">The Cultural Christian</div><div class="prof-desc">Familiar with Christianity by tradition but does not actively practise.</div></div></div>
+        <div class="prof-card"><img class="prof-img" src="https://raw.githubusercontent.com/Brolloks/OAC/main/Profile%207.png" alt="P7"><div class="prof-info"><div class="prof-num">Profile 07</div><div class="prof-name">The Moral Humanist</div><div class="prof-desc">Values ethics and living well. Believes morality needs no religion.</div></div></div>
+        <div class="prof-card"><img class="prof-img" src="https://raw.githubusercontent.com/Brolloks/OAC/main/Profile%208.png" alt="P8"><div class="prof-info"><div class="prof-num">Profile 08</div><div class="prof-name">The Curious Friend</div><div class="prof-desc">Genuinely interested and open to faith, still exploring and not yet settled.</div></div></div>
+        <div class="prof-card"><img class="prof-img" src="https://raw.githubusercontent.com/Brolloks/OAC/main/Profile%209.png" alt="P9"><div class="prof-info"><div class="prof-num">Profile 09</div><div class="prof-name">The Hurt Believer</div><div class="prof-desc">Believes in God but hurt by past experiences with church or people.</div></div></div>
+        <div class="prof-card"><img class="prof-img" src="https://raw.githubusercontent.com/Brolloks/OAC/main/Profile%2010.png" alt="P10"><div class="prof-info"><div class="prof-num">Profile 10</div><div class="prof-name">The Uninterested Peer</div><div class="prof-desc">Not opposed to faith but not engaged or curious about deeper topics.</div></div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="nav">
+    <button class="nav-btn" id="prevBtn" onclick="go(-1)" disabled>← Prev</button>
+    <div class="nav-center" id="dotWrap"></div>
+    <span class="nav-counter" id="counter">1 / ?</span>
+    <button class="nav-btn" id="nextBtn" onclick="go(1)">Next →</button>
+  </div>
+</div>
+
+<script>
+const G=[
+  {n:1,tag:"Br Fourie (Tag)",topics:["Vessel of Blessing / Shepherd / Overplaced","Trinity — the Father, Son and Holy Ghost are one God"],members:[{name:"Tristan Dean Hagedorn",r:"Br",age:29,c:"UK"},{name:"Bradley Harper",r:"Br",age:18,c:"UK"},{name:"Nicole Tolbert",r:"Sr",age:"—",c:"Ireland"},{name:"Terry Onang Egute",r:"Br",age:17,c:"Germany"},{name:"Cianna Ornellas",r:"Sr",age:15,c:"UK"}]},
+  {n:2,tag:"Sr Fourie (Tag)",topics:["The Apostle — what is the role of the Apostle?","Sealing — please explain the sealing and why I need to go through it?"],members:[{name:"Roxanne Cronje",r:"Sr",age:34,c:"UK"},{name:"Rethabile Maatla Mogolole",r:"Sr",age:"—",c:"Ireland"},{name:"Caleb Renkin",r:"Br",age:"—",c:"Ireland"},{name:"Lorne van der Merwe",r:"Sr",age:"—",c:"Ireland"},{name:"Colin Kriel",r:"Br",age:19,c:"UK"}]},
+  {n:3,tag:"Br Carstens (Tag)",topics:["Three Holy Sacraments — why do I need to go through each to be part of the body?","Tithing — why do we do it and what is the purpose?"],members:[{name:"Erin Manuel",r:"Sr",age:26,c:"UK"},{name:"Leuan Jones",r:"Br",age:17,c:"UK"},{name:"Leah Renkin",r:"Sr",age:"—",c:"Ireland"},{name:"Jenifer Buskes",r:"Sr",age:"—",c:"Ireland"},{name:"Wayne Eben Kriel",r:"Br",age:25,c:"UK"}]},
+  {n:4,tag:"Pr Morris",topics:["Reading the Bible spiritually","Everlasting life — the soul inherits everlasting life. What does that mean?"],members:[{name:"Samuel Payne",r:"Br",age:22,c:"UK"},{name:"Wyatt Smouse",r:"Br",age:15,c:"UK"},{name:"Tristan Eales",r:"Br",age:"—",c:"Ireland"},{name:"Ashley Gilberto Uache",r:"Sr",age:18,c:"Germany"},{name:"Isago Molefe",r:"Br",age:16,c:"UK"}]},
+  {n:5,tag:"Pr & Sr Prinsloo",topics:["Creation in Genesis 1 — is it natural or spiritual?","Baptism — why do I need to be baptised and what is the difference between Holy and True baptism?"],members:[{name:"Lekeisha Brownley",r:"Sr",age:17,c:"UK"},{name:"Amelia Bakbak",r:"Sr",age:18,c:"UK"},{name:"Tshireletso Moipolai",r:"Br",age:"—",c:"Ireland"},{name:"David Muller",r:"Br",age:16,c:"Germany"},{name:"Rosinah Mphetlhe",r:"Sr",age:27,c:"UK"}]},
+  {n:6,tag:"Pr & Sr Stanz",topics:["Holy Communion — what is it and what is the difference between Holy and True communion?","Anointed Handlings — what is it, what is the purpose, and when can I receive them?"],members:[{name:"Tamlyn Fourie",r:"Sr",age:"—",c:"UK"},{name:"Izel Bakbak",r:"Sr",age:18,c:"UK"},{name:"Boago Victor Ratshoswane",r:"Br",age:"—",c:"Ireland"},{name:"Jakob Schapke",r:"Br",age:18,c:"Germany"},{name:"Matthew Welcome",r:"Br",age:19,c:"UK"}]},
+  {n:7,tag:"U/D & Sr van der Merwe",topics:["The Prophet — what is it?","The Body of Christ — explain that the Old Apostolic Church represents the body of Christ today"],members:[{name:"Suné van der Sandt",r:"Sr",age:16,c:"UK"},{name:"Aidan Fourie",r:"Br",age:20,c:"UK"},{name:"Elena Martine Kalchbrenner",r:"Sr",age:"—",c:"Ireland"},{name:"Julian Steinbruck",r:"Br",age:22,c:"Germany"},{name:"Meekhai Felix",r:"Sr",age:15,c:"UK"}]},
+  {n:8,tag:"Elder Schapke",topics:["The Bible represents the word of God — why do we believe that?","Everlasting life — what is it and who can inherit it?"],members:[{name:"Aimee-Lee Beggache",r:"Sr",age:17,c:"UK"},{name:"Fred Harvey",r:"Br",age:19,c:"UK"},{name:"Kebitsang Naomi Tsheko",r:"Sr",age:"—",c:"Ireland"},{name:"Leonie Altmann",r:"Sr",age:18,c:"Germany"},{name:"Theunis (Janko) Lourens",r:"Br",age:20,c:"UK"}]},
+  {n:9,tag:"Br Fourie",topics:["Rebirth — what is it and why do I need to be reborn?","Heaven and Earth — where and what is it? Declare the spiritual heaven and earth"],members:[{name:"Gianni Prinsloo",r:"Br",age:27,c:"UK"},{name:"Star Sonnenberg",r:"Sr",age:17,c:"UK"},{name:"Moitlamo Sejammu",r:"Sr",age:"—",c:"Ireland"},{name:"Samuel Schapke",r:"Br",age:16,c:"Germany"},{name:"Clinton Freeman",r:"Br",age:14,c:"UK"}]},
+  {n:10,tag:"Sr Fourie",topics:["Emmanuel Principle — God in flesh. Explain this.","Evangelist — describe the functions of the Evangelist"],members:[{name:"Robin Smouse",r:"Br",age:18,c:"UK"},{name:"Winona Smouse",r:"Sr",age:19,c:"UK"},{name:"Angelique Le Roux",r:"Sr",age:"—",c:"Ireland"},{name:"Selina Kupper",r:"Sr",age:20,c:"Germany"},{name:"Simphiwe (Sim) Mbatha",r:"Br",age:30,c:"UK"}]},
+  {n:11,tag:"Br Carstens",topics:["Vessel of Blessing / Shepherd / Overplaced","The Body of Christ — explain that the Old Apostolic Church represents the body of Christ today"],members:[{name:"Louis Junior Nkomo",r:"Br",age:18,c:"UK"},{name:"Steven Orji",r:"Br",age:"—",c:"Ireland"},{name:"Monique Niehaus",r:"Sr",age:"—",c:"Italy (EU)"},{name:"Simon Kupper",r:"Br",age:16,c:"Germany"},{name:"Siyathuthuka (Siya) Mbatha",r:"Br",age:20,c:"UK"}]},
+  {n:12,tag:"Pr Morris",topics:["Creation in Genesis 1 — is it natural or spiritual?","The Bible represents the word of God — why do we believe that?"],members:[{name:"Keisha Orji",r:"Sr",age:"—",c:"UK"},{name:"Keen Orji",r:"Br",age:"—",c:"Ireland"},{name:"Melusi Thato Mogolole",r:"Sr",age:"—",c:"Ireland"},{name:"Theo Gorike",r:"Br",age:18,c:"Germany"},{name:"Musa (Mahle) Mbatha",r:"Sr",age:16,c:"UK"}]},
+  {n:13,tag:"Pr & Sr Prinsloo",topics:["Three Holy Sacraments — why do I need to go through each to be part of the body?","The Body of Christ — explain that the Old Apostolic Church represents the body of Christ today"],members:[{name:"Mya Prinsloo",r:"Sr",age:20,c:"UK"},{name:"Tyrece Orji",r:"Br",age:"—",c:"Ireland"},{name:"Tobias Schapke",r:"Br",age:21,c:"Germany"},{name:"Rhys Smouse",r:"Br",age:15,c:"UK"},{name:"Aimee Paige Payne",r:"Sr",age:19,c:"UK"}]}
+];
+
+const wrap=document.querySelector('.slides-wrap');
+G.forEach(g=>{
+  const rows=g.members.map(m=>`<tr><td>${m.name}</td><td><span class="rtag ${m.r.toLowerCase()}">${m.r}</span></td><td>${m.age}</td><td>${m.c}</td></tr>`).join('');
+  const topics=g.topics.map((t,i)=>`<div class="topic-item"><div class="topic-num">${i+1}</div><div class="topic-txt">${t}</div></div>`).join('');
+  const d=document.createElement('div');
+  d.className='slide';d.id=`sg${g.n}`;
+  d.innerHTML=`
+    <div class="grp-hdr">
+      <div class="grp-badge"><div class="grp-num">${g.n}</div><div class="grp-badge-txt">Group ${g.n}</div></div>
+      <div class="grp-sub">Evangelistic Groups</div>
+    </div>
+    <div class="grp-layout">
+      <div><div class="grp-tbl-wrap"><div class="grp-tbl-lbl">Members</div>
+        <table><thead><tr><th>Name</th><th>Role</th><th>Age</th><th>Country</th></tr></thead><tbody>${rows}</tbody></table>
+      </div></div>
+      <div class="grp-right">
+        <div class="topics-card"><div class="topics-lbl">Assigned Topics</div>${topics}</div>
+        <div class="fac-card"><div class="fac-lbl">Facilitator</div><div class="fac-name">${g.tag}</div></div>
+      </div>
+    </div>`;
+  wrap.appendChild(d);
+});
+
+const pc=document.createElement('div');
+pc.className='slide';pc.id='spc';
+pc.innerHTML=`
+  <div class="slide-hdr"><div class="eyebrow">Looking Forward</div><h2>Post Camp Commitment</h2></div>
+  <div class="pc-items">
+    <div class="pc-item"><div class="pc-icon">🌱</div>Apply what you have learnt about testimony in your everyday conversations and encounters — not only at camp.</div>
+    <div class="pc-item"><div class="pc-icon">🤝</div>Continue breaking bread with your group and with fellow youth members beyond the camp weekend.</div>
+    <div class="pc-item"><div class="pc-icon">💬</div>Reflect on the character encounter — what it revealed about your posture, your listening, and your understanding of faith.</div>
+    <div class="pc-item"><div class="pc-icon">✉️</div>Stay connected with your group and support one another in continued spiritual growth.</div>
+  </div>`;
+wrap.appendChild(pc);
+
+const slides=[...document.querySelectorAll('.slide')];
+const total=slides.length;
+let cur=0;
+const dotWrap=document.getElementById('dotWrap');
+const fill=document.getElementById('progressFill');
+
+slides.forEach((_,i)=>{
+  const d=document.createElement('div');
+  d.className='nav-dot'+(i===0?' active':'');
+  d.onclick=()=>goTo(i);
+  dotWrap.appendChild(d);
+});
+
+function goTo(idx){
+  slides[cur].classList.remove('active');
+  slides[cur].classList.add('exit');
+  setTimeout(()=>slides[cur]&&slides[cur].classList.remove('exit'),350);
+  document.querySelectorAll('.nav-dot')[cur].classList.remove('active');
+  cur=Math.max(0,Math.min(total-1,idx));
+  slides[cur].classList.add('active');
+  document.querySelectorAll('.nav-dot')[cur].classList.add('active');
+  document.getElementById('counter').textContent=`${cur+1} / ${total}`;
+  document.getElementById('prevBtn').disabled=cur===0;
+  document.getElementById('nextBtn').disabled=cur===total-1;
+  fill.style.width=`${((cur+1)/total)*100}%`;
+}
+function go(d){goTo(cur+d);}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown')go(1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(-1);
+});
+goTo(0);
+</script>
+</body>
+</html>
