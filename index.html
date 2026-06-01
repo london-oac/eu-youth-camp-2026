@@ -106,7 +106,7 @@ td{font-size:22px;color:var(--brown2);padding:10px 14px;border-bottom:1px solid 
 tr:last-child td{border-bottom:none}
 td:first-child{color:var(--brown);font-weight:600}
 .rtag{display:inline-block;padding:3px 10px;font-family:var(--fb);font-size:14px;font-weight:700;letter-spacing:.05em}
-.rtag.br{background:var(--teal);color:var(--cream)}.rtag.sr{background:var(--orange);color:var(--cream)}
+.rtag.br{background:var(--teal);color:var(--cream)}.rtag.sr{background:var(--orange);color:var(--cream)}.rtag.t{background:var(--gold);color:var(--brown)}
 .grp-right{display:flex;flex-direction:column;gap:10px}
 .topics-card{border:1px solid var(--cream3);overflow:hidden}
 .topics-lbl{font-family:var(--fb);font-size:16px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--cream);background:var(--orange);padding:12px 16px}
@@ -417,31 +417,31 @@ td:first-child{color:var(--brown);font-weight:600}
 <script>
 const G=[
   {n:1,tag:"Br Fourie (Tag)",topics:["Vessel of Blessing / Shepherd / Overplaced","Trinity — the Father, Son and Holy Ghost are one God"],members:[{name:"Tristan Dean Hagedorn",r:"Br",c:"UK"},{name:"Bradley Harper",r:"Br",c:"UK"},{name:"Nicole Tolbert",r:"Sr",c:"Ireland"},{name:"David Muller",r:"Br",c:"Germany"},{name:"Cianna Ornellas",r:"Sr",c:"UK"}]},
-  {n:2,tag:"Sr Fourie (Tag)",topics:["The Apostle — what is the role of the Apostle?","Sealing — please explain the sealing and why I need to go through it?"],members:[{name:"Roxanne Cronje",r:"Sr",c:"UK"},{name:"Rethabile Maatla Mogolole",r:"Sr",c:"Ireland"},{name:"Caleb Renkin",r:"Br",c:"Ireland"},{name:"Lorne van der Merwe",r:"Sr",c:"Ireland"},{name:"Colin Kriel",r:"Br",c:"UK"}]},
-  {n:3,tag:"Br Carstens (Tag)",topics:["Three Holy Sacraments — why do I need to go through each to be part of the body?","Tithing — why do we do it and what is the purpose?"],members:[{name:"Erin Manuel",r:"Sr",c:"UK"},{name:"Leuan Jones",r:"Br",c:"UK"},{name:"Leah Renkin",r:"Sr",c:"Ireland"},{name:"Jenifer Buskes",r:"Sr",c:"Ireland"},{name:"Wayne Eben Kriel",r:"Br",c:"UK"}]},
+  {n:2,tag:"Sr Fourie (Tag)",topics:["The Apostle — what is the role of the Apostle?","Sealing — please explain the sealing and why I need to go through it?"],members:[{name:"Roxanne Cronje",r:"Sr",c:"UK"},{name:"Rethabile Maatla Mogolole",r:"Sr",c:"Ireland"},{name:"Caleb Renkin ⚠",r:"Br",c:"Ireland"},{name:"Kaylin Fourie",r:"Sr",c:"UK"},{name:"Colin Kriel",r:"Br",c:"UK"}]},
+  {n:3,tag:"Br Carstens (Tag)",topics:["Three Holy Sacraments — why do I need to go through each to be part of the body?","Tithing — why do we do it and what is the purpose?"],members:[{name:"Erin Manuel",r:"Sr",c:"UK"},{name:"Leuan Jones",r:"Br",c:"UK"},{name:"Leah Renkin",r:"Sr",c:"Ireland"},{name:"Juan Jacobs",r:"Br",c:"UK"},{name:"Wayne Eben Kriel",r:"Br",c:"UK"}]},
   {n:4,tag:"Pr Morris",topics:["Reading the Bible spiritually","Everlasting life — the soul inherits everlasting life. What does that mean?"],members:[{name:"Samuel Payne",r:"Br",c:"UK"},{name:"Wyatt Smouse",r:"Br",c:"UK"},{name:"Tristan Eales",r:"Br",c:"Ireland"},{name:"Ashley Gilberto Uache",r:"Sr",c:"Germany"},{name:"Isago Molefe",r:"Br",c:"UK"}]},
-  {n:5,tag:"Pr & Sr Prinsloo",topics:["Creation in Genesis 1 — is it natural or spiritual?","Baptism — why do I need to be baptised and what is the difference between Holy and True baptism?"],members:[{name:"Lekeisha Brownley",r:"Sr",c:"UK"},{name:"Amelia Bakbak",r:"Sr",c:"UK"},{name:"Tshireletso Moipolai",r:"Br",c:"Ireland"},{name:"Terry Onang Egute",r:"Br",c:"Germany"},{name:"Rosinah Mphetlhe",r:"Sr",c:"UK"}]},
+  {n:5,tag:"Pr & Sr Prinsloo",topics:["Creation in Genesis 1 — is it natural or spiritual?","Baptism — why do I need to be baptised and what is the difference between Holy and True baptism?"],members:[{name:"Lekeisha Brownley",r:"Sr",c:"UK"},{name:"Amelia Bakbak",r:"Sr",c:"UK"},{name:"Tshireletso Moipolai",r:"Sr",c:"Ireland"},{name:"Terry Onang Egute",r:"Br",c:"Germany"},{name:"Rosinah Mphetlhe",r:"Sr",c:"UK"}]},
   {n:6,tag:"Overseer Fourie",topics:["Holy Communion — what is it and what is the difference between Holy and True communion?","Anointed Handlings — what is it, what is the purpose, and when can I receive them?"],members:[{name:"Tamlyn Fourie",r:"Sr",c:"UK"},{name:"Izel Bakbak",r:"Sr",c:"UK"},{name:"Boago Victor Ratshoswane",r:"Br",c:"Ireland"},{name:"Jakob Schapke",r:"Br",c:"Germany"},{name:"Matthew Welcome",r:"Br",c:"UK"}]},
   {n:7,tag:"U/D & Sr van der Merwe",topics:["The Prophet — what is it?","The Body of Christ — explain that the Old Apostolic Church represents the body of Christ today"],members:[{name:"Suné van der Sandt",r:"Sr",c:"UK"},{name:"Aidan Fourie",r:"Br",c:"UK"},{name:"Elena Martine Kalchbrenner",r:"Sr",c:"Ireland"},{name:"Julian Steinbruck",r:"Br",c:"Germany"},{name:"Meekhai Felix",r:"Sr",c:"UK"}]},
-  {n:8,tag:"Elder Schapke",topics:["The Bible represents the word of God — why do we believe that?","Everlasting life — what is it and who can inherit it?"],members:[{name:"Aimee-Lee Beggache",r:"Sr",c:"UK"},{name:"Fred Harvey",r:"Br",c:"UK"},{name:"Kebitsang Naomi Tsheko",r:"Sr",c:"Ireland"},{name:"Leonie Altmann",r:"Sr",c:"Germany"},{name:"Theunis (Janko) Lourens",r:"Br",c:"UK"}]},
-  {n:9,tag:"Br Fourie",topics:["Rebirth — what is it and why do I need to be reborn?","Heaven and Earth — where and what is it? Declare the spiritual heaven and earth"],members:[{name:"Gianni Prinsloo",r:"Br",c:"UK"},{name:"Star Sonnenberg",r:"Sr",c:"UK"},{name:"Moitlamo Sejammu",r:"Sr",c:"Ireland"},{name:"Samuel Schapke",r:"Br",c:"Germany"},{name:"Clinton Freeman",r:"Br",c:"UK"}]},
+  {n:8,tag:"Elder Schapke",topics:["The Bible represents the word of God — why do we believe that?","Everlasting life — what is it and who can inherit it?"],members:[{name:"Aimee-Lee Beggache",r:"Sr",c:"UK"},{name:"Fred Harvey",r:"Br",c:"UK"},{name:"Kebitsang Naomi Tsheko",r:"Sr",c:"Ireland"},{name:"Leonie Altmann",r:"Sr",c:"Germany"},{name:"Theunis (Janko) Lourens",r:"Br",c:"UK"},{name:"Jan Benjamin Reinicke",r:"T",c:"Germany"}]},
+  {n:9,tag:"Br Fourie",topics:["Rebirth — what is it and why do I need to be reborn?","Heaven and Earth — where and what is it? Declare the spiritual heaven and earth"],members:[{name:"Gianni Prinsloo",r:"Br",c:"UK"},{name:"Star Sonnenberg",r:"Sr",c:"UK"},{name:"Moitlamo Sejammu",r:"Sr",c:"Ireland"},{name:"Samuel Schapke",r:"Br",c:"Germany"},{name:"Clinton Freeman",r:"Br",c:"UK"},{name:"Anthony Broderick",r:"T",c:"UK"}]},
   {n:10,tag:"Sr Fourie",topics:["Emmanuel Principle — God in flesh. Explain this.","Evangelist — describe the functions of the Evangelist"],members:[{name:"Robin Smouse",r:"Br",c:"UK"},{name:"Winona Smouse",r:"Sr",c:"UK"},{name:"Angelique Le Roux",r:"Sr",c:"Ireland"},{name:"Selina Kupper",r:"Sr",c:"Germany"},{name:"Simphiwe (Sim) Mbatha",r:"Br",c:"UK"}]},
   {n:11,tag:"Br Carstens",topics:["Vessel of Blessing / Shepherd / Overplaced","The Body of Christ — explain that the Old Apostolic Church represents the body of Christ today"],members:[{name:"Louis Junior Nkomo",r:"Br",c:"UK"},{name:"Steven Orji",r:"Br",c:"Ireland"},{name:"Monique Niehaus",r:"Sr",c:"Italy (EU)"},{name:"Simon Kupper",r:"Br",c:"Germany"},{name:"Siyathuthuka (Siya) Mbatha",r:"Br",c:"UK"}]},
-  {n:12,tag:"Pr Morris",topics:["Creation in Genesis 1 — is it natural or spiritual?","The Bible represents the word of God — why do we believe that?"],members:[{name:"Keisha Orji",r:"Sr",c:"UK"},{name:"Keen Orji",r:"Br",c:"Ireland"},{name:"Melusi Thato Mogolole",r:"Sr",c:"Ireland"},{name:"Theo Gorike",r:"Br",c:"Germany"},{name:"Musa (Mahle) Mbatha",r:"Sr",c:"UK"}]},
+  {n:12,tag:"Pr Morris",topics:["Creation in Genesis 1 — is it natural or spiritual?","The Bible represents the word of God — why do we believe that?"],members:[{name:"Keisha Orji",r:"Sr",c:"UK"},{name:"Keen Orji",r:"Br",c:"Ireland"},{name:"Melusi Thato Mogolole",r:"Sr",c:"Ireland"},{name:"Theo Gorike",r:"Br",c:"Germany"},{name:"Musa (Mahle) Mbatha",r:"Sr",c:"UK"},{name:"Arthur Gorike",r:"Br",c:"Germany"}]},
   {n:13,tag:"Pr & Sr Prinsloo",topics:["Three Holy Sacraments — why do I need to go through each to be part of the body?","The Body of Christ — explain that the Old Apostolic Church represents the body of Christ today"],members:[{name:"Mya Prinsloo",r:"Sr",c:"UK"},{name:"Tyrece Orji",r:"Br",c:"Ireland"},{name:"Tobias Schapke",r:"Br",c:"Germany"},{name:"Rhys Smouse",r:"Br",c:"UK"},{name:"Aimee Paige Payne",r:"Sr",c:"UK"}]}
 ];
 
 const PROFILES={
   1:{num:"03",name:"The Spiritual-but-Not-Religious",img:"Profile%203.png",charIdx:0},
   2:{num:"07",name:"The Moral Humanist",img:"Profile%207.png",charIdx:0},
-  3:{num:"01",name:"The Thoughtful Scientific Thinker",img:"Profile%201.png",charIdx:2},
+  3:{num:"01",name:"The Thoughtful Scientific Thinker",img:"Profile%201.png",charIdx:0},
   4:{num:"09",name:"The Hurt Believer",img:"Profile%209.png",charIdx:0},
   5:{num:"05",name:"The Busy Professional",img:"Profile%205.png",charIdx:3},
   6:{num:"02",name:"The Cautious Churchgoer",img:"Profile%202.png",charIdx:2},
   7:{num:"08",name:"The Curious Friend",img:"Profile%208.png",charIdx:3},
   8:{num:"04",name:"The Friendly Skeptic",img:"Profile%204.png",charIdx:3},
   9:{num:"10",name:"The Uninterested Peer",img:"Profile%2010.png",charIdx:0},
-  10:{num:"06",name:"The Cultural Christian",img:"Profile%206.png",charIdx:2},
+  10:{num:"06",name:"The Cultural Christian",img:"Profile%206.png",charIdx:0},
   11:{num:"05",name:"The Busy Professional",img:"Profile%205.png",charIdx:2},
   12:{num:"02",name:"The Cautious Churchgoer",img:"Profile%202.png",charIdx:0},
   13:{num:"08",name:"The Curious Friend",img:"Profile%208.png",charIdx:2}
